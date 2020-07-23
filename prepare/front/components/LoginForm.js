@@ -1,16 +1,19 @@
 import React, { useCallback, useMemo } from "react";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { Form, Input, Button } from "antd";
 import Link from "next/link";
 
 import useInput from "../hooks/useInput";
+import { logInAction } from "../reducers";
 
-const LoginForm = ({ setIsLoggedIn }) => {
+const LoginForm = () => {
+    const dispatch = useDispatch();
+
     const [id, onChangeId] = useInput("");
     const [password, onChangePassword] = useInput("");
 
     const onSubmitForm = useCallback(() => {
-        setIsLoggedIn(true);
+        dispatch(logInAction({ id, password }));
     }, [id, password]);
 
     const FormContainer = useMemo(() => ({ padding: "10px" }), []);
@@ -53,10 +56,6 @@ const LoginForm = ({ setIsLoggedIn }) => {
             </div>
         </Form>
     );
-};
-
-LoginForm.propTypes = {
-    setIsLoggedIn: PropTypes.func.isRequired,
 };
 
 export default LoginForm;
