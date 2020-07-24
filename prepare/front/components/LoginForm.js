@@ -4,7 +4,7 @@ import { Form, Input, Button } from "antd";
 import Link from "next/link";
 
 import useInput from "../hooks/useInput";
-import { logInAction } from "../reducers";
+import { logInAction } from "../reducers/user";
 
 const LoginForm = () => {
     const dispatch = useDispatch();

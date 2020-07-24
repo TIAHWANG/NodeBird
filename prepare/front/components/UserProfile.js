@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { Card, Avatar, Button } from "antd";
 
-import { logOutAction } from "../reducers";
+import { logOutAction } from "../reducers/user";
 
 const UserProfile = () => {
     const dispatch = useDispatch();
