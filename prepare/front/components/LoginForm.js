@@ -1,19 +1,20 @@
 import React, { useCallback, useMemo } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Input, Button } from "antd";
 import Link from "next/link";
 
 import useInput from "../hooks/useInput";
-import { logInAction } from "../reducers/user";
+import { logInRequestAction } from "../reducers/user";
 
 const LoginForm = () => {
     const dispatch = useDispatch();
+    const { isLoggingIn } = useSelector((state) => state.user);
 
     const [id, onChangeId] = useInput("");
     const [password, onChangePassword] = useInput("");
 
     const onSubmitForm = useCallback(() => {
-        dispatch(logInAction({ id, password }));
+        dispatch(logInRequestAction({ id, password }));
     }, [id, password]);
 
     const FormContainer = useMemo(() => ({ padding: "10px" }), []);
@@ -45,7 +46,7 @@ const LoginForm = () => {
                 />
             </div>
             <div style={ButtonContainer}>
-                <Button type="primary" htmlType="submit" loading={false}>
+                <Button type="primary" htmlType="submit" loading={isLoggingIn}>
                     로그인
                 </Button>
                 <Link href="/signup">
