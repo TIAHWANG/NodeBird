@@ -8,14 +8,14 @@ import { logInRequestAction } from "../reducers/user";
 
 const LoginForm = () => {
     const dispatch = useDispatch();
-    const { isLoggingIn } = useSelector((state) => state.user);
+    const { logInLoading } = useSelector((state) => state.user);
 
-    const [id, onChangeId] = useInput("");
+    const [email, onChangeEmail] = useInput("");
     const [password, onChangePassword] = useInput("");
 
     const onSubmitForm = useCallback(() => {
-        dispatch(logInRequestAction({ id, password }));
-    }, [id, password]);
+        dispatch(logInRequestAction({ email, password }));
+    }, [email, password]);
 
     const FormContainer = useMemo(() => ({ padding: "10px" }), []);
     const ButtonContainer = useMemo(() => ({ marginTop: "10px" }), []);
@@ -23,12 +23,13 @@ const LoginForm = () => {
     return (
         <Form onFinish={onSubmitForm} style={FormContainer}>
             <div>
-                <label htmlFor="user-id">아이디</label>
+                <label htmlFor="user-email">이메일</label>
                 <br />
                 <Input
-                    name="user-id"
-                    value={id}
-                    onChange={onChangeId}
+                    name="user-email"
+                    type="email"
+                    value={email}
+                    onChange={onChangeEmail}
                     required
                     autoComplete="false"
                 />
@@ -46,7 +47,7 @@ const LoginForm = () => {
                 />
             </div>
             <div style={ButtonContainer}>
-                <Button type="primary" htmlType="submit" loading={isLoggingIn}>
+                <Button type="primary" htmlType="submit" loading={logInLoading}>
                     로그인
                 </Button>
                 <Link href="/signup">
