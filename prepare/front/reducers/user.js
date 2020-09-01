@@ -136,6 +136,7 @@ const reducer = (state = initialState, action) => {
             //     },
             // };
             case REMOVE_POST_OF_ME:
+                // 성능문제가 나중에 생기면 filter 대신 unshift 사용
                 draft.me.Posts = draft.me.Posts.filter((v) => v.id !== action.data);
                 break;
             // return {
